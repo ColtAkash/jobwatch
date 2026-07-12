@@ -1,0 +1,162 @@
+# jobwatch companies -- "Name" or "Name | careers_url"
+# The URL hint is used by resolve.py to detect ATS + slug directly.
+1Password
+7shifts | https://boards.greenhouse.io/7shifts
+AbCellera | https://boards.greenhouse.io/abcellera
+Accenture Canada
+Achievers
+Ada Support
+Alayacare
+Aritzia | https://aritzia.wd3.myworkdayjobs.com/en-US/External
+Assent
+Auvik Networks
+Bank of Montreal | https://bmo.wd3.myworkdayjobs.com/en-US/External
+Benevity
+BlackBerry | https://bb.wd3.myworkdayjobs.com/en-US/BlackBerry
+CAE Inc | https://cae.wd3.myworkdayjobs.com/en-US/career
+Canadian Tire | https://canadiantirecorporation.wd3.myworkdayjobs.com/en-US/Enterprise_External_Careers_Site
+Capital Power | https://capitalpower.wd10.myworkdayjobs.com/en-US/External
+Cenovus Energy | https://cenovus.wd3.myworkdayjobs.com/en-US/Careers
+CIBC | https://cibc.wd3.myworkdayjobs.com/en-US/search
+Clearco
+Cohere
+D2L
+Deep Genomics
+Desjardins Group | https://desjardins.wd10.myworkdayjobs.com/en-US/Desjardins
+Digital Extremes
+Docebo
+Enbridge | https://enbridge.wd3.myworkdayjobs.com/en-US/enbridge_careers
+EQ Bank
+Faire
+Finning International | https://finning.wd3.myworkdayjobs.com/en-US/External
+Gearbox Montreal
+Genetec
+Geotab | https://boards.greenhouse.io/geotab
+Hootsuite
+Hopper
+iA Financial Group | https://ia.wd3.myworkdayjobs.com/en-US/Professional
+Instacart Canada
+Intact Financial | https://intactfc.wd3.myworkdayjobs.com/en-US/intactfc
+Jobber
+Kepler Communications | https://jobs.lever.co/kepler
+Klue
+Koho
+Later
+League | https://boards.greenhouse.io/leagueinc
+Loopio
+Magna International | https://magna.wd3.myworkdayjobs.com/en-US/Magna
+Manulife | https://manulife.wd3.myworkdayjobs.com/en-US/MFCJH_Jobs
+Maple
+Metro Inc
+Mistplay
+Neo Financial
+PointClickCare
+PwC Canada | https://pwc.wd3.myworkdayjobs.com/en-US/Global_Experienced_Careers
+Ritual
+Royal Bank of Canada | https://rbc.wd3.myworkdayjobs.com/en-US/RBCGLOBAL1
+Sonder Holdings | https://sonder.wd1.myworkdayjobs.com/en-US/Join_Sonder
+StackAdapt | https://boards.greenhouse.io/stackadapt
+Sun Life Financial | https://sunlife.wd3.myworkdayjobs.com/en-US/Experienced-Jobs
+Suncor Energy | https://suncor.wd1.myworkdayjobs.com/en-US/Suncor_External
+Tailscale | https://boards.greenhouse.io/tailscale
+TC Energy | https://tcenergy.wd3.myworkdayjobs.com/en-US/CAREER_SITE_TC
+TD Bank Group | https://td.wd3.myworkdayjobs.com/en-US/TD_Bank_Careers
+Tenstorrent
+Thinkific
+Top Hat
+TouchBistro
+Trulioo
+Unbounce
+Vendasta | https://vendasta.bamboohr.com/careers
+Waabi
+Wattpad
+Wave | https://jobs.lever.co/waveapps
+Wealthsimple
+Zensurance
+Nuvei | https://apply.workable.com/nuvei
+Jane App | https://jobs.ashbyhq.com/jane
+Warner Bros Games Montreal | https://warnerbros.wd5.myworkdayjobs.com/en-US/global
+Ubisoft Canada | https://jobs.smartrecruiters.com/Ubisoft2
+OMERS | https://omers.wd3.myworkdayjobs.com/en-US/OMERS_External
+CPP Investments | https://cppib.wd10.myworkdayjobs.com/en-US/cppinvestments
+Interac | https://interac.wd3.myworkdayjobs.com/en-US/Interac
+Moneris | https://moneris.wd3.myworkdayjobs.com/en-US/Moneris
+EllisDon | https://ellisdon.wd3.myworkdayjobs.com/en-US/Ellis-Don
+NVIDIA Canada | https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite
+Autodesk Canada | https://autodesk.wd1.myworkdayjobs.com/en-US/Ext
+Ciena Canada | https://ciena.wd5.myworkdayjobs.com/en-US/Careers
+Thomson Reuters | https://thomsonreuters.wd5.myworkdayjobs.com/en-US/External_Career_Site
+University of British Columbia | https://ubc.wd10.myworkdayjobs.com/en-US/ubcstaffjobs
+Stripe | https://boards.greenhouse.io/stripe
+Cloudflare | https://boards.greenhouse.io/cloudflare
+Asana | https://boards.greenhouse.io/asana
+GitLab | https://boards.greenhouse.io/gitlab
+Affirm | https://boards.greenhouse.io/affirm
+Block | https://boards.greenhouse.io/block
+DoorDash Canada | https://boards.greenhouse.io/doordashcanada
+Datadog | https://boards.greenhouse.io/datadog
+MongoDB | https://boards.greenhouse.io/mongodb
+Twilio | https://boards.greenhouse.io/twilio
+Dropbox | https://boards.greenhouse.io/dropbox
+Reddit | https://boards.greenhouse.io/reddit
+Pinterest | https://boards.greenhouse.io/pinterest
+Coinbase Canada | https://boards.greenhouse.io/coinbase
+Samsara | https://boards.greenhouse.io/samsara
+Squarespace | https://boards.greenhouse.io/squarespace
+Netlify | https://boards.greenhouse.io/netlify
+Vercel | https://boards.greenhouse.io/vercel
+PagerDuty | https://boards.greenhouse.io/pagerduty
+Flipp | https://boards.greenhouse.io/flipp
+Tucows | https://boards.greenhouse.io/tucows
+Elastic | https://boards.greenhouse.io/elastic
+Epic Games | https://boards.greenhouse.io/epicgames
+Rockstar Games | https://boards.greenhouse.io/rockstargames
+Mozilla | https://boards.greenhouse.io/mozilla
+Okta | https://boards.greenhouse.io/okta
+Attentive | https://boards.greenhouse.io/attentive
+Fastly | https://boards.greenhouse.io/fastly
+Squarepoint Capital | https://boards.greenhouse.io/squarepointcapital
+Ripple | https://boards.greenhouse.io/ripple
+Canonical | https://boards.greenhouse.io/canonical
+CircleCI | https://boards.greenhouse.io/circleci
+Cockroach Labs | https://boards.greenhouse.io/cockroachlabs
+Grafana Labs | https://boards.greenhouse.io/grafanalabs
+Temporal Technologies | https://boards.greenhouse.io/temporaltechnologies
+Remote.com | https://boards.greenhouse.io/remotecom
+Wikimedia Foundation | https://boards.greenhouse.io/wikimedia
+Magnet Forensics | https://jobs.lever.co/magnetforensics
+Ideogram | https://jobs.ashbyhq.com/ideogram
+Supabase | https://jobs.ashbyhq.com/supabase
+Gameloft | https://jobs.smartrecruiters.com/gameloft
+Keywords Studios | https://jobs.smartrecruiters.com/keywordsstudios
+Canada Revenue Agency
+Ontario Public Service
+City of Toronto
+Toronto Transit Commission
+Statistics Canada
+Canada Post
+Bank of Canada
+Shopify
+Scotiabank
+TELUS
+Rogers Communications
+Bell Canada
+Air Canada
+WestJet
+National Bank of Canada
+OpenText
+Ceridian
+Deloitte Canada
+EY Canada
+KPMG Canada
+CGI Group
+Lightspeed Commerce
+FreshBooks
+Coveo
+Clio
+Vidyard
+Recursion | https://boards.greenhouse.io/recursionpharmaceuticals
+Kinaxis
+Celestica
+Nutrien
+Hydro One

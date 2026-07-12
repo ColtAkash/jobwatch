@@ -1,0 +1,794 @@
+{
+  "role_keywords": [
+    "software engineer",
+    "software developer",
+    "swe",
+    "backend",
+    "back-end",
+    "frontend",
+    "front-end",
+    "full stack",
+    "fullstack",
+    "full-stack",
+    "data engineer",
+    "data scientist",
+    "data analyst",
+    "machine learning",
+    "ml engineer",
+    "ai engineer",
+    "applied scientist",
+    "research engineer",
+    "platform engineer",
+    "infrastructure engineer",
+    "site reliability",
+    "developer",
+    "programmer",
+    "engineer i",
+    "engineer, ",
+    "computer science"
+  ],
+  "exclude_title_keywords": [
+    "senior",
+    "sr.",
+    "sr ",
+    "staff",
+    "principal",
+    "lead ",
+    "lead,",
+    "director",
+    "head of",
+    "vp ",
+    "vice president",
+    "intern",
+    "internship",
+    "co-op",
+    "coop",
+    "architect",
+    "distinguished",
+    "manager",
+    "executive",
+    "chief"
+  ],
+  "locations": [
+    "canada",
+    "toronto",
+    "vancouver",
+    "montreal",
+    "montréal",
+    "ottawa",
+    "calgary",
+    "waterloo",
+    "kitchener",
+    "edmonton",
+    "winnipeg",
+    "victoria",
+    "halifax",
+    "quebec",
+    "québec",
+    "mississauga",
+    "burnaby",
+    "richmond hill",
+    "markham",
+    "remote - canada",
+    "remote (canada)",
+    "remote, canada"
+  ],
+  "companies": [
+    {
+      "name": "1Password",
+      "ats": "ashby",
+      "slug": "1password"
+    },
+    {
+      "name": "7shifts",
+      "ats": "greenhouse",
+      "slug": "7shifts"
+    },
+    {
+      "name": "AbCellera",
+      "ats": "greenhouse",
+      "slug": "abcellera"
+    },
+    {
+      "name": "Accenture Canada",
+      "ats": "recruitee",
+      "slug": "accenture"
+    },
+    {
+      "name": "Achievers",
+      "ats": "lever",
+      "slug": "achievers"
+    },
+    {
+      "name": "Ada Support",
+      "ats": "bamboohr",
+      "slug": "adasupport"
+    },
+    {
+      "name": "Affirm",
+      "ats": "greenhouse",
+      "slug": "affirm"
+    },
+    {
+      "name": "Alayacare",
+      "ats": "greenhouse",
+      "slug": "alayacare"
+    },
+    {
+      "name": "Aritzia",
+      "ats": "workday",
+      "tenant": "aritzia",
+      "host": "aritzia.wd3.myworkdayjobs.com",
+      "site": "External"
+    },
+    {
+      "name": "Asana",
+      "ats": "greenhouse",
+      "slug": "asana"
+    },
+    {
+      "name": "Assent",
+      "ats": "smartrecruiters",
+      "slug": "assent"
+    },
+    {
+      "name": "Attentive",
+      "ats": "greenhouse",
+      "slug": "attentive"
+    },
+    {
+      "name": "Autodesk Canada",
+      "ats": "workday",
+      "tenant": "autodesk",
+      "host": "autodesk.wd1.myworkdayjobs.com",
+      "site": "Ext"
+    },
+    {
+      "name": "Auvik Networks",
+      "ats": "greenhouse",
+      "slug": "auviknetworks"
+    },
+    {
+      "name": "Bank of Montreal",
+      "ats": "workday",
+      "tenant": "bmo",
+      "host": "bmo.wd3.myworkdayjobs.com",
+      "site": "External"
+    },
+    {
+      "name": "Benevity",
+      "ats": "ashby",
+      "slug": "benevity"
+    },
+    {
+      "name": "BlackBerry",
+      "ats": "workday",
+      "tenant": "bb",
+      "host": "bb.wd3.myworkdayjobs.com",
+      "site": "BlackBerry"
+    },
+    {
+      "name": "Block",
+      "ats": "greenhouse",
+      "slug": "block"
+    },
+    {
+      "name": "CAE Inc",
+      "ats": "workday",
+      "tenant": "cae",
+      "host": "cae.wd3.myworkdayjobs.com",
+      "site": "career"
+    },
+    {
+      "name": "Canadian Tire",
+      "ats": "workday",
+      "tenant": "canadiantirecorporation",
+      "host": "canadiantirecorporation.wd3.myworkdayjobs.com",
+      "site": "Enterprise_External_Careers_Site"
+    },
+    {
+      "name": "Canonical",
+      "ats": "greenhouse",
+      "slug": "canonical"
+    },
+    {
+      "name": "Capital Power",
+      "ats": "workday",
+      "tenant": "capitalpower",
+      "host": "capitalpower.wd10.myworkdayjobs.com",
+      "site": "External"
+    },
+    {
+      "name": "Cenovus Energy",
+      "ats": "workday",
+      "tenant": "cenovus",
+      "host": "cenovus.wd3.myworkdayjobs.com",
+      "site": "Careers"
+    },
+    {
+      "name": "CIBC",
+      "ats": "workday",
+      "tenant": "cibc",
+      "host": "cibc.wd3.myworkdayjobs.com",
+      "site": "search"
+    },
+    {
+      "name": "Ciena Canada",
+      "ats": "workday",
+      "tenant": "ciena",
+      "host": "ciena.wd5.myworkdayjobs.com",
+      "site": "Careers"
+    },
+    {
+      "name": "CircleCI",
+      "ats": "greenhouse",
+      "slug": "circleci"
+    },
+    {
+      "name": "Clearco",
+      "ats": "ashby",
+      "slug": "clearco"
+    },
+    {
+      "name": "Cloudflare",
+      "ats": "greenhouse",
+      "slug": "cloudflare"
+    },
+    {
+      "name": "Cockroach Labs",
+      "ats": "greenhouse",
+      "slug": "cockroachlabs"
+    },
+    {
+      "name": "Cohere",
+      "ats": "ashby",
+      "slug": "cohere"
+    },
+    {
+      "name": "Coinbase Canada",
+      "ats": "greenhouse",
+      "slug": "coinbase"
+    },
+    {
+      "name": "CPP Investments",
+      "ats": "workday",
+      "tenant": "cppib",
+      "host": "cppib.wd10.myworkdayjobs.com",
+      "site": "cppinvestments"
+    },
+    {
+      "name": "D2L",
+      "ats": "greenhouse",
+      "slug": "d2l"
+    },
+    {
+      "name": "Datadog",
+      "ats": "greenhouse",
+      "slug": "datadog"
+    },
+    {
+      "name": "Deep Genomics",
+      "ats": "lever",
+      "slug": "deepgenomics"
+    },
+    {
+      "name": "Desjardins Group",
+      "ats": "workday",
+      "tenant": "desjardins",
+      "host": "desjardins.wd10.myworkdayjobs.com",
+      "site": "Desjardins"
+    },
+    {
+      "name": "Digital Extremes",
+      "ats": "greenhouse",
+      "slug": "digitalextremes"
+    },
+    {
+      "name": "Docebo",
+      "ats": "ashby",
+      "slug": "docebo"
+    },
+    {
+      "name": "DoorDash Canada",
+      "ats": "greenhouse",
+      "slug": "doordashcanada"
+    },
+    {
+      "name": "Dropbox",
+      "ats": "greenhouse",
+      "slug": "dropbox"
+    },
+    {
+      "name": "Elastic",
+      "ats": "greenhouse",
+      "slug": "elastic"
+    },
+    {
+      "name": "EllisDon",
+      "ats": "workday",
+      "tenant": "ellisdon",
+      "host": "ellisdon.wd3.myworkdayjobs.com",
+      "site": "Ellis-Don"
+    },
+    {
+      "name": "Enbridge",
+      "ats": "workday",
+      "tenant": "enbridge",
+      "host": "enbridge.wd3.myworkdayjobs.com",
+      "site": "enbridge_careers"
+    },
+    {
+      "name": "Epic Games",
+      "ats": "greenhouse",
+      "slug": "epicgames"
+    },
+    {
+      "name": "EQ Bank",
+      "ats": "lever",
+      "slug": "eqbank"
+    },
+    {
+      "name": "Faire",
+      "ats": "greenhouse",
+      "slug": "faire"
+    },
+    {
+      "name": "Fastly",
+      "ats": "greenhouse",
+      "slug": "fastly"
+    },
+    {
+      "name": "Finning International",
+      "ats": "workday",
+      "tenant": "finning",
+      "host": "finning.wd3.myworkdayjobs.com",
+      "site": "External"
+    },
+    {
+      "name": "Flipp",
+      "ats": "greenhouse",
+      "slug": "flipp"
+    },
+    {
+      "name": "Gameloft",
+      "ats": "smartrecruiters",
+      "slug": "gameloft"
+    },
+    {
+      "name": "Gearbox Montreal",
+      "ats": "greenhouse",
+      "slug": "gearbox"
+    },
+    {
+      "name": "Genetec",
+      "ats": "smartrecruiters",
+      "slug": "genetec"
+    },
+    {
+      "name": "Geotab",
+      "ats": "greenhouse",
+      "slug": "geotab"
+    },
+    {
+      "name": "GitLab",
+      "ats": "greenhouse",
+      "slug": "gitlab"
+    },
+    {
+      "name": "Grafana Labs",
+      "ats": "greenhouse",
+      "slug": "grafanalabs"
+    },
+    {
+      "name": "Hootsuite",
+      "ats": "greenhouse",
+      "slug": "hootsuite"
+    },
+    {
+      "name": "Hopper",
+      "ats": "ashby",
+      "slug": "hopper"
+    },
+    {
+      "name": "iA Financial Group",
+      "ats": "workday",
+      "tenant": "ia",
+      "host": "ia.wd3.myworkdayjobs.com",
+      "site": "Professional"
+    },
+    {
+      "name": "Ideogram",
+      "ats": "ashby",
+      "slug": "ideogram"
+    },
+    {
+      "name": "Instacart Canada",
+      "ats": "greenhouse",
+      "slug": "instacart"
+    },
+    {
+      "name": "Intact Financial",
+      "ats": "workday",
+      "tenant": "intactfc",
+      "host": "intactfc.wd3.myworkdayjobs.com",
+      "site": "intactfc"
+    },
+    {
+      "name": "Interac",
+      "ats": "workday",
+      "tenant": "interac",
+      "host": "interac.wd3.myworkdayjobs.com",
+      "site": "Interac"
+    },
+    {
+      "name": "Jane App",
+      "ats": "ashby",
+      "slug": "jane"
+    },
+    {
+      "name": "Jobber",
+      "ats": "ashby",
+      "slug": "jobber"
+    },
+    {
+      "name": "Kepler Communications",
+      "ats": "lever",
+      "slug": "kepler"
+    },
+    {
+      "name": "Keywords Studios",
+      "ats": "smartrecruiters",
+      "slug": "keywordsstudios"
+    },
+    {
+      "name": "Klue",
+      "ats": "ashby",
+      "slug": "klue"
+    },
+    {
+      "name": "Koho",
+      "ats": "ashby",
+      "slug": "koho"
+    },
+    {
+      "name": "Later",
+      "ats": "greenhouse",
+      "slug": "later"
+    },
+    {
+      "name": "League",
+      "ats": "greenhouse",
+      "slug": "leagueinc"
+    },
+    {
+      "name": "Loopio",
+      "ats": "ashby",
+      "slug": "loopio"
+    },
+    {
+      "name": "Magna International",
+      "ats": "workday",
+      "tenant": "magna",
+      "host": "magna.wd3.myworkdayjobs.com",
+      "site": "Magna"
+    },
+    {
+      "name": "Magnet Forensics",
+      "ats": "lever",
+      "slug": "magnetforensics"
+    },
+    {
+      "name": "Manulife",
+      "ats": "workday",
+      "tenant": "manulife",
+      "host": "manulife.wd3.myworkdayjobs.com",
+      "site": "MFCJH_Jobs"
+    },
+    {
+      "name": "Maple",
+      "ats": "ashby",
+      "slug": "maple"
+    },
+    {
+      "name": "Metro Inc",
+      "ats": "smartrecruiters",
+      "slug": "metroinc"
+    },
+    {
+      "name": "Mistplay",
+      "ats": "lever",
+      "slug": "mistplay"
+    },
+    {
+      "name": "Moneris",
+      "ats": "workday",
+      "tenant": "moneris",
+      "host": "moneris.wd3.myworkdayjobs.com",
+      "site": "Moneris"
+    },
+    {
+      "name": "MongoDB",
+      "ats": "greenhouse",
+      "slug": "mongodb"
+    },
+    {
+      "name": "Mozilla",
+      "ats": "greenhouse",
+      "slug": "mozilla"
+    },
+    {
+      "name": "Neo Financial",
+      "ats": "ashby",
+      "slug": "neofinancial"
+    },
+    {
+      "name": "Netlify",
+      "ats": "greenhouse",
+      "slug": "netlify"
+    },
+    {
+      "name": "Nuvei",
+      "ats": "workable",
+      "slug": "nuvei"
+    },
+    {
+      "name": "NVIDIA Canada",
+      "ats": "workday",
+      "tenant": "nvidia",
+      "host": "nvidia.wd5.myworkdayjobs.com",
+      "site": "NVIDIAExternalCareerSite"
+    },
+    {
+      "name": "Okta",
+      "ats": "greenhouse",
+      "slug": "okta"
+    },
+    {
+      "name": "OMERS",
+      "ats": "workday",
+      "tenant": "omers",
+      "host": "omers.wd3.myworkdayjobs.com",
+      "site": "OMERS_External"
+    },
+    {
+      "name": "PagerDuty",
+      "ats": "greenhouse",
+      "slug": "pagerduty"
+    },
+    {
+      "name": "Pinterest",
+      "ats": "greenhouse",
+      "slug": "pinterest"
+    },
+    {
+      "name": "PointClickCare",
+      "ats": "lever",
+      "slug": "pointclickcare"
+    },
+    {
+      "name": "PwC Canada",
+      "ats": "workday",
+      "tenant": "pwc",
+      "host": "pwc.wd3.myworkdayjobs.com",
+      "site": "Global_Experienced_Careers"
+    },
+    {
+      "name": "Recursion",
+      "ats": "greenhouse",
+      "slug": "recursionpharmaceuticals"
+    },
+    {
+      "name": "Reddit",
+      "ats": "greenhouse",
+      "slug": "reddit"
+    },
+    {
+      "name": "Remote.com",
+      "ats": "greenhouse",
+      "slug": "remotecom"
+    },
+    {
+      "name": "Ripple",
+      "ats": "greenhouse",
+      "slug": "ripple"
+    },
+    {
+      "name": "Ritual",
+      "ats": "greenhouse",
+      "slug": "ritual"
+    },
+    {
+      "name": "Rockstar Games",
+      "ats": "greenhouse",
+      "slug": "rockstargames"
+    },
+    {
+      "name": "Royal Bank of Canada",
+      "ats": "workday",
+      "tenant": "rbc",
+      "host": "rbc.wd3.myworkdayjobs.com",
+      "site": "RBCGLOBAL1"
+    },
+    {
+      "name": "Samsara",
+      "ats": "greenhouse",
+      "slug": "samsara"
+    },
+    {
+      "name": "Sonder Holdings",
+      "ats": "workday",
+      "tenant": "sonder",
+      "host": "sonder.wd1.myworkdayjobs.com",
+      "site": "Join_Sonder"
+    },
+    {
+      "name": "Squarepoint Capital",
+      "ats": "greenhouse",
+      "slug": "squarepointcapital"
+    },
+    {
+      "name": "Squarespace",
+      "ats": "greenhouse",
+      "slug": "squarespace"
+    },
+    {
+      "name": "StackAdapt",
+      "ats": "greenhouse",
+      "slug": "stackadapt"
+    },
+    {
+      "name": "Stripe",
+      "ats": "greenhouse",
+      "slug": "stripe"
+    },
+    {
+      "name": "Sun Life Financial",
+      "ats": "workday",
+      "tenant": "sunlife",
+      "host": "sunlife.wd3.myworkdayjobs.com",
+      "site": "Experienced-Jobs"
+    },
+    {
+      "name": "Suncor Energy",
+      "ats": "workday",
+      "tenant": "suncor",
+      "host": "suncor.wd1.myworkdayjobs.com",
+      "site": "Suncor_External"
+    },
+    {
+      "name": "Supabase",
+      "ats": "ashby",
+      "slug": "supabase"
+    },
+    {
+      "name": "Tailscale",
+      "ats": "greenhouse",
+      "slug": "tailscale"
+    },
+    {
+      "name": "TC Energy",
+      "ats": "workday",
+      "tenant": "tcenergy",
+      "host": "tcenergy.wd3.myworkdayjobs.com",
+      "site": "CAREER_SITE_TC"
+    },
+    {
+      "name": "TD Bank Group",
+      "ats": "workday",
+      "tenant": "td",
+      "host": "td.wd3.myworkdayjobs.com",
+      "site": "TD_Bank_Careers"
+    },
+    {
+      "name": "Temporal Technologies",
+      "ats": "greenhouse",
+      "slug": "temporaltechnologies"
+    },
+    {
+      "name": "Tenstorrent",
+      "ats": "greenhouse",
+      "slug": "tenstorrent"
+    },
+    {
+      "name": "Thinkific",
+      "ats": "greenhouse",
+      "slug": "thinkific"
+    },
+    {
+      "name": "Thomson Reuters",
+      "ats": "workday",
+      "tenant": "thomsonreuters",
+      "host": "thomsonreuters.wd5.myworkdayjobs.com",
+      "site": "External_Career_Site"
+    },
+    {
+      "name": "Top Hat",
+      "ats": "ashby",
+      "slug": "top-hat"
+    },
+    {
+      "name": "TouchBistro",
+      "ats": "greenhouse",
+      "slug": "touchbistro"
+    },
+    {
+      "name": "Trulioo",
+      "ats": "ashby",
+      "slug": "trulioo"
+    },
+    {
+      "name": "Tucows",
+      "ats": "greenhouse",
+      "slug": "tucows"
+    },
+    {
+      "name": "Twilio",
+      "ats": "greenhouse",
+      "slug": "twilio"
+    },
+    {
+      "name": "Ubisoft Canada",
+      "ats": "smartrecruiters",
+      "slug": "Ubisoft2"
+    },
+    {
+      "name": "Unbounce",
+      "ats": "greenhouse",
+      "slug": "unbounce"
+    },
+    {
+      "name": "University of British Columbia",
+      "ats": "workday",
+      "tenant": "ubc",
+      "host": "ubc.wd10.myworkdayjobs.com",
+      "site": "ubcstaffjobs"
+    },
+    {
+      "name": "Vendasta",
+      "ats": "bamboohr",
+      "slug": "vendasta"
+    },
+    {
+      "name": "Vercel",
+      "ats": "greenhouse",
+      "slug": "vercel"
+    },
+    {
+      "name": "Waabi",
+      "ats": "lever",
+      "slug": "waabi"
+    },
+    {
+      "name": "Warner Bros Games Montreal",
+      "ats": "workday",
+      "tenant": "warnerbros",
+      "host": "warnerbros.wd5.myworkdayjobs.com",
+      "site": "global"
+    },
+    {
+      "name": "Wattpad",
+      "ats": "lever",
+      "slug": "wattpad"
+    },
+    {
+      "name": "Wave",
+      "ats": "lever",
+      "slug": "waveapps"
+    },
+    {
+      "name": "Wealthsimple",
+      "ats": "ashby",
+      "slug": "wealthsimple"
+    },
+    {
+      "name": "Wikimedia Foundation",
+      "ats": "greenhouse",
+      "slug": "wikimedia"
+    },
+    {
+      "name": "Zensurance",
+      "ats": "lever",
+      "slug": "zensurance"
+    }
+  ]
+}
