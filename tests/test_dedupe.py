@@ -1,9 +1,4 @@
-import sys
-from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-
-import main  # noqa: E402
+import main
 
 
 def test_same_job_produces_same_key():
@@ -29,6 +24,14 @@ def test_falls_back_to_url_when_no_id():
     key1 = main.dedupe_key("Acme", job)
     key2 = main.dedupe_key("Acme", {"id": None, "url": "https://example.com/jobs/xyz"})
     assert key1 == key2
+
+
+def test_empty_string_id_falls_back_to_url_without_collision():
+    """ATS clients normalize a missing id to "" -- two id-less jobs at the
+    same company must not collapse to one key (the str(None) bug)."""
+    job_a = {"id": "", "url": "https://example.com/jobs/a"}
+    job_b = {"id": "", "url": "https://example.com/jobs/b"}
+    assert main.dedupe_key("Acme", job_a) != main.dedupe_key("Acme", job_b)
 
 
 def test_key_is_stable_string_not_random():

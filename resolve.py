@@ -191,10 +191,13 @@ def detect_from_url(url: str) -> dict | None:
         return {"ats": "bamboohr", "slug": host.split(".")[0]}
 
     m = _WORKDAY_RE.match(host)
-    if m and len(path) >= 2:
+    if m and path:
         tenant = m.group(1)
-        # path is like [locale?, site, ...] e.g. /en-US/External or /External
-        site = path[1] if path[0].lower() in ("en-us", "en-ca") and len(path) > 1 else path[0]
+        # path is [locale?, site, ...] e.g. /en-US/External, /fr-CA/Site, /External
+        if re.fullmatch(r"[a-z]{2}-[a-z]{2}", path[0], re.IGNORECASE) and len(path) > 1:
+            site = path[1]
+        else:
+            site = path[0]
         return {"ats": "workday", "tenant": tenant, "host": host, "site": site}
 
     return None

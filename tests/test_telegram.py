@@ -1,10 +1,6 @@
-import sys
-from pathlib import Path
 from unittest.mock import MagicMock, patch
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-
-import main  # noqa: E402
+import main
 
 MAX_MSG_LEN = main.MAX_MSG_LEN
 
@@ -71,6 +67,31 @@ def test_extremely_long_single_block_is_hard_split():
     assert len(messages) > 1
     for msg in messages:
         assert len(msg) <= MAX_MSG_LEN
+
+
+def test_oversized_block_splits_on_line_boundaries():
+    """A hard-split must never slice a [title](url) Markdown entity in half."""
+    huge_jobs = make_jobs(500)
+    messages = main.build_messages({"Acme": huge_jobs})
+    for msg in messages:
+        # every bullet line that appears must be complete: balanced brackets
+        for line in msg.split("\n"):
+            if line.startswith("•"):
+                assert line.count("[") == line.count("]")
+                assert line.count("(") == line.count(")")
+
+
+def test_markdown_metacharacters_are_escaped():
+    jobs = [{"id": "1", "title": "Back_end Developer [Toronto] *urgent*", "url": "https://x.io/jobs/1", "location": "Toronto"}]
+    block = main.build_company_block("Snap_Commerce [Inc]", jobs)
+    assert "Back\\_end Developer \\[Toronto\\] \\*urgent\\*" in block
+    assert "*Snap\\_Commerce \\[Inc\\]*" in block
+
+
+def test_link_urls_with_parentheses_are_escaped():
+    jobs = [{"id": "1", "title": "Engineer", "url": "https://x.io/jobs/1(a)", "location": "Toronto"}]
+    block = main.build_company_block("Acme", jobs)
+    assert "(https://x.io/jobs/1%28a%29)" in block
 
 
 @patch("ats.request_with_retry")

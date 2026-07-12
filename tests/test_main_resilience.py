@@ -1,11 +1,7 @@
 import json
-import sys
-from pathlib import Path
 from unittest.mock import patch
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-
-import main  # noqa: E402
+import main
 
 BASE_CONFIG = {
     "role_keywords": ["software engineer", "ml engineer", "data engineer"],
@@ -33,17 +29,36 @@ def test_mixed_dead_and_healthy_companies_isolate_failures():
     healthy = {"name": "GoodCo", "ats": "greenhouse", "slug": "goodco"}
     config = dict(BASE_CONFIG, companies=[dead_company(i) for i in range(10)] + [healthy])
 
+    known_job = {"id": "0", "title": "Data Engineer, New Grad", "location": "Toronto", "url": "https://x/0"}
+    new_job = {"id": "1", "title": "Software Engineer, New Grad", "location": "Toronto", "url": "https://x/1"}
+    seen = {main.dedupe_key("GoodCo", known_job)}
+
     def fake_fetch(entry):
         if entry["name"] == "GoodCo":
-            return [{"id": "1", "title": "Software Engineer, New Grad", "location": "Toronto", "url": "https://x/1"}]
+            return [dict(known_job), dict(new_job)]
         raise main.ats.AtsError("board not found")
 
     with patch("ats.fetch_jobs", side_effect=fake_fetch):
-        new_by_company, all_keys, errors = main.collect_new_postings(config, seen=set())
+        new_by_company, all_keys, errors = main.collect_new_postings(config, seen=seen)
 
     assert len(errors) == 10
     assert "GoodCo" in new_by_company
-    assert len(all_keys) == 1
+    assert [j["id"] for j in new_by_company["GoodCo"]] == ["1"]
+    assert len(all_keys) == 2
+
+
+def test_never_seen_company_seeds_silently_even_when_seen_json_exists():
+    """A company whose keys are all absent from seen (newly added, or every
+    prior run errored) must have its back-catalog recorded, not notified."""
+    config = dict(BASE_CONFIG, companies=[{"name": "NewCo", "ats": "greenhouse", "slug": "newco"}])
+    seen = {main.dedupe_key("OtherCo", {"id": "9", "url": "https://x/9"})}
+
+    jobs = [{"id": str(i), "title": "Software Engineer, New Grad", "location": "Toronto", "url": f"https://x/{i}"} for i in range(50)]
+    with patch("ats.fetch_jobs", return_value=jobs):
+        new_by_company, all_keys, _ = main.collect_new_postings(config, seen=seen)
+
+    assert new_by_company == {}  # no flood of 50 "new" postings
+    assert len(all_keys) == 51  # but all keys recorded for next run
 
 
 def test_first_run_seeds_silently_and_exits_zero(tmp_path, monkeypatch):

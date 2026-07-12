@@ -22,6 +22,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+          cache: "pip"
 
       - name: Install dependencies
         run: pip install -r requirements.txt
@@ -39,6 +40,9 @@ jobs:
           if ! git diff --quiet -- seen.json; then
             git add seen.json
             git commit -m "chore: update seen.json [skip ci]"
+            # rebase in case anything landed on the branch mid-run, so the
+            # push is fast-forward and the seen.json update is never dropped
+            git pull --rebase origin "$GITHUB_REF_NAME"
             git push
           else
             echo "no change to seen.json"

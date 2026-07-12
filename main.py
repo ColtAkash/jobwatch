@@ -67,6 +67,11 @@ def fetch_company_jobs(entry: dict) -> tuple[str, list[dict], str | None]:
 def collect_new_postings(
     config: dict, seen: set[str]
 ) -> tuple[dict[str, list[dict]], set[str], list[tuple[str, str]]]:
+    """Per-company seeding: if NONE of a company's current relevant postings
+    are in `seen`, the company is being observed for the first time (fresh
+    seen.json, newly added company, or a company whose earlier runs all
+    errored) -- its back-catalog is recorded silently instead of notified,
+    so a company can never flood the digest with years-old postings."""
     companies = config.get("companies", [])
     new_by_company: dict[str, list[dict]] = {}
     all_keys = set(seen)
@@ -80,14 +85,17 @@ def collect_new_postings(
                 errors.append((name, error))
                 print(f"  ! {name}: {error}", file=sys.stderr)
                 continue
-            for job in jobs:
-                if not is_relevant_title(job.get("title"), config):
-                    continue
-                if not is_relevant_location(job.get("location"), config):
-                    continue
-                key = dedupe_key(name, job)
+            relevant = [
+                job
+                for job in jobs
+                if is_relevant_title(job.get("title"), config)
+                and is_relevant_location(job.get("location"), config)
+            ]
+            keyed = [(dedupe_key(name, job), job) for job in relevant]
+            company_known = any(key in seen for key, _ in keyed)
+            for key, job in keyed:
                 all_keys.add(key)
-                if key not in seen:
+                if company_known and key not in seen:
                     new_by_company.setdefault(name, []).append(job)
 
     return new_by_company, all_keys, errors
@@ -98,12 +106,28 @@ def linkedin_recruiter_link(company_name: str) -> str:
     return f"https://www.linkedin.com/search/results/people/?keywords={q}"
 
 
+def escape_markdown(text: str) -> str:
+    """Escape Telegram legacy-Markdown metacharacters in display text.
+    A title like "Back_end Developer [Toronto]" would otherwise make
+    sendMessage fail with "can't parse entities" -- and since that error is
+    raised before seen.json is saved, the same job would crash every
+    subsequent run too."""
+    for ch in ("\\", "_", "*", "[", "]", "`"):
+        text = text.replace(ch, f"\\{ch}")
+    return text
+
+
+def escape_link_url(url: str) -> str:
+    """Parentheses inside a Markdown link target terminate the link early."""
+    return url.replace("(", "%28").replace(")", "%29")
+
+
 def build_company_block(company: str, jobs: list[dict]) -> str:
-    lines = [f"*{company}*"]
+    lines = [f"*{escape_markdown(company)}*"]
     for job in jobs:
-        title = job.get("title") or "Untitled"
-        url = job.get("url") or ""
-        loc = job.get("location") or "n/a"
+        title = escape_markdown(job.get("title") or "Untitled")
+        url = escape_link_url(job.get("url") or "")
+        loc = escape_markdown(job.get("location") or "n/a")
         lines.append(f"• [{title}]({url}) — {loc}")
     lines.append(f"[Find a recruiter]({linkedin_recruiter_link(company)})")
     return "\n".join(lines)
@@ -129,8 +153,21 @@ def build_messages(new_by_company: dict[str, list[dict]]) -> list[str]:
         if len(block) <= MAX_MSG_LEN:
             current = block
         else:
-            for i in range(0, len(block), MAX_MSG_LEN):
-                messages.append(block[i : i + MAX_MSG_LEN])
+            # Oversized single block: split on line boundaries so a Markdown
+            # [title](url) entity is never sliced mid-link (Telegram rejects
+            # messages with unbalanced entities).
+            piece = ""
+            for line in block.split("\n"):
+                if len(line) > MAX_MSG_LEN:
+                    line = line[: MAX_MSG_LEN - 1]  # pathological single line
+                candidate_piece = f"{piece}\n{line}" if piece else line
+                if len(candidate_piece) <= MAX_MSG_LEN:
+                    piece = candidate_piece
+                else:
+                    messages.append(piece)
+                    piece = line
+            if piece:
+                messages.append(piece)
     if current:
         messages.append(current)
     return messages
@@ -185,8 +222,26 @@ def main() -> int:
         print("TELEGRAM_TOKEN/TELEGRAM_CHAT_ID not set; skipping send.", file=sys.stderr)
         return 1
 
-    for message in build_messages(new_by_company):
-        send_telegram(token, chat_id, message)
+    messages = build_messages(new_by_company)
+    sent = 0
+    for message in messages:
+        try:
+            send_telegram(token, chat_id, message)
+            sent += 1
+        except Exception as exc:  # noqa: BLE001 - one bad chunk must not abort the rest
+            print(f"telegram send failed for one chunk: {exc}", file=sys.stderr)
+
+    if sent == 0:
+        # Telegram is down entirely: keep seen.json unsaved so the whole
+        # digest retries next run instead of being lost.
+        print("all telegram sends failed; not saving seen.json", file=sys.stderr)
+        return 1
+
+    if sent < len(messages):
+        # Partial delivery: save anyway. Re-sending the delivered chunks
+        # every subsequent hour (duplicate storm) is worse than losing the
+        # one failed chunk.
+        print(f"sent {sent}/{len(messages)} chunks; saving seen.json", file=sys.stderr)
 
     save_seen(all_keys)
     return 0

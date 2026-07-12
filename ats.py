@@ -21,9 +21,20 @@ USER_AGENT = "jobwatch/1.0 (+https://github.com/)"
 DEFAULT_TIMEOUT = 20
 MAX_RETRIES = 3
 BACKOFF_BASE = 1.5
+MAX_RETRY_AFTER = 60  # cap server-supplied Retry-After so one host can't stall a worker
 
-_session = requests.Session()
-_session.headers.update({"User-Agent": USER_AGENT, "Accept": "application/json"})
+# requests.Session is not thread-safe (cookie-jar mutation races), and
+# main.py fetches with 15 worker threads -- give each thread its own session.
+_thread_local = __import__("threading").local()
+
+
+def _session() -> requests.Session:
+    s = getattr(_thread_local, "session", None)
+    if s is None:
+        s = requests.Session()
+        s.headers.update({"User-Agent": USER_AGENT, "Accept": "application/json"})
+        _thread_local.session = s
+    return s
 
 
 class AtsError(Exception):
@@ -39,29 +50,29 @@ def _request(method: str, url: str, max_retries: int | None = None, **kwargs: An
     if max_retries is None:
         max_retries = MAX_RETRIES
     kwargs.setdefault("timeout", DEFAULT_TIMEOUT)
-    last_exc: Exception | None = None
     for attempt in range(max_retries + 1):
         try:
-            resp = _session.request(method, url, **kwargs)
+            resp = _session().request(method, url, **kwargs)
         except (requests.ConnectionError, requests.Timeout) as exc:
-            last_exc = exc
             if attempt == max_retries:
                 raise AtsError(f"{method} {url} failed: {exc}") from exc
             time.sleep(_backoff_delay(attempt))
             continue
 
         if resp.status_code == 429 or resp.status_code >= 500:
-            last_exc = AtsError(f"{method} {url} -> HTTP {resp.status_code}")
             if attempt == max_retries:
-                raise last_exc
+                raise AtsError(f"{method} {url} -> HTTP {resp.status_code}")
             retry_after = resp.headers.get("Retry-After")
-            delay = float(retry_after) if retry_after and retry_after.isdigit() else _backoff_delay(attempt)
+            if retry_after and retry_after.isdigit():
+                delay = min(float(retry_after), MAX_RETRY_AFTER)
+            else:
+                delay = _backoff_delay(attempt)
             time.sleep(delay)
             continue
 
         return resp
 
-    raise AtsError(f"{method} {url} failed") from last_exc
+    raise AtsError(f"{method} {url} failed")  # pragma: no cover - loop always returns or raises
 
 
 def _backoff_delay(attempt: int) -> float:
@@ -78,6 +89,11 @@ def _probe_get(url: str, **kwargs: Any) -> requests.Response:
     return _request("GET", url, max_retries=0, **kwargs)
 
 
+def _probe_post(url: str, **kwargs: Any) -> requests.Response:
+    """Fail-fast POST for probers (see _probe_get)."""
+    return _request("POST", url, max_retries=0, **kwargs)
+
+
 def _post(url: str, **kwargs: Any) -> requests.Response:
     return _request("POST", url, **kwargs)
 
@@ -85,6 +101,12 @@ def _post(url: str, **kwargs: Any) -> requests.Response:
 # --------------------------------------------------------------------------
 # Greenhouse
 # --------------------------------------------------------------------------
+def _norm_id(value: Any) -> str:
+    """Normalize an ATS job id: None becomes "" (falsy) so main.dedupe_key
+    can fall back to the job URL instead of colliding on the string "None"."""
+    return "" if value is None else str(value)
+
+
 def fetch_greenhouse(slug: str) -> list[dict]:
     """https://boards-api.greenhouse.io/v1/boards/{slug}/jobs?content=true
 
@@ -101,7 +123,7 @@ def fetch_greenhouse(slug: str) -> list[dict]:
     for job in data.get("jobs", []):
         out.append(
             {
-                "id": str(job.get("id")),
+                "id": _norm_id(job.get("id")),
                 "title": job.get("title", ""),
                 "location": (job.get("location") or {}).get("name", ""),
                 "url": job.get("absolute_url", ""),
@@ -147,9 +169,9 @@ def fetch_lever(slug: str) -> list[dict]:
         categories = job.get("categories") or {}
         out.append(
             {
-                "id": str(job.get("id")),
+                "id": _norm_id(job.get("id")),
                 "title": job.get("text", ""),
-                "location": categories.get("location", "") or job.get("country", ""),
+                "location": categories.get("location", "") or "",
                 "url": job.get("hostedUrl", ""),
                 "posted": job.get("createdAt", ""),
             }
@@ -188,7 +210,7 @@ def fetch_ashby(slug: str) -> list[dict]:
             continue
         out.append(
             {
-                "id": str(job.get("id")),
+                "id": _norm_id(job.get("id")),
                 "title": job.get("title", ""),
                 "location": job.get("location", ""),
                 "url": job.get("jobUrl") or job.get("applyUrl", ""),
@@ -244,7 +266,7 @@ def fetch_workday(tenant: str, host: str, site: str) -> list[dict]:
             path = job.get("externalPath", "")
             out.append(
                 {
-                    "id": path or job.get("bulletFields", [""])[0],
+                    "id": path or (job.get("bulletFields") or [""])[0],
                     "title": job.get("title", ""),
                     "location": job.get("locationsText", ""),
                     "url": f"https://{host}/en-US/{site}{path}",
@@ -260,7 +282,7 @@ def fetch_workday(tenant: str, host: str, site: str) -> list[dict]:
 def probe_workday(tenant: str, host: str, site: str) -> bool:
     try:
         base = f"https://{host}/wday/cxs/{tenant}/{site}/jobs"
-        resp = _post(
+        resp = _probe_post(
             base,
             json={"appliedFacets": {}, "limit": 1, "offset": 0, "searchText": ""},
             headers={"Content-Type": "application/json"},
@@ -301,7 +323,7 @@ def fetch_smartrecruiters(slug: str) -> list[dict]:
             loc = job.get("location") or {}
             out.append(
                 {
-                    "id": str(job.get("id")),
+                    "id": _norm_id(job.get("id")),
                     "title": job.get("name", ""),
                     "location": loc.get("fullLocation") or loc.get("city", ""),
                     "url": f"https://jobs.smartrecruiters.com/{slug}/{job.get('id')}",
@@ -352,7 +374,7 @@ def fetch_recruitee(slug: str) -> list[dict]:
         location = ", ".join(p for p in (city, country) if p)
         out.append(
             {
-                "id": str(job.get("id")),
+                "id": _norm_id(job.get("id")),
                 "title": job.get("title", ""),
                 "location": location,
                 "url": job.get("careers_apply_url", ""),
@@ -437,7 +459,7 @@ def fetch_bamboohr(slug: str) -> list[dict]:
             location = f"Remote {location}".strip()
         out.append(
             {
-                "id": str(job.get("id")),
+                "id": _norm_id(job.get("id")),
                 "title": job.get("jobOpeningName", ""),
                 "location": location,
                 "url": f"https://{slug}.bamboohr.com/careers/{job.get('id')}",
