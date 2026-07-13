@@ -242,6 +242,8 @@ def main() -> int:
         # every subsequent hour (duplicate storm) is worse than losing the
         # one failed chunk.
         print(f"sent {sent}/{len(messages)} chunks; saving seen.json", file=sys.stderr)
+    else:
+        print(f"Telegram: delivered {sent} message(s) ({total_new} postings) to chat.")
 
     save_seen(all_keys)
     return 0
